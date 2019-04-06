@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --aot -o --port 4270",
     "build": "ng build",
+    "build:pub": "ng build --prod --output-path docs --base-href https://trainingit-introangular-ed2.github.io/angular-board/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
