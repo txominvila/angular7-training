@@ -1,11 +1,11 @@
 <h2>{{ header }}</h2>
 <ul class="list-group" *ngIf="projects.length>0; else empty">
   <li class="list-group-item" *ngFor="let project of projects">
-    <a href="/projects/{{ project.id }}" title="{{ project.name }}">{{ project.name }}</a>
+    <a href="projects/{{ project.id }}" title="{{ project.name }}">{{ project.name }}</a>
   </li>
 </ul>
 <ng-template #empty> <i>No data yet</i> </ng-template>
 
-<a id="add-new" href="/projects/new" class="badge badge-success">Add new project</a>
+<a id="add-new" href="projects/new" class="badge badge-success">Add new project</a>
 
 
