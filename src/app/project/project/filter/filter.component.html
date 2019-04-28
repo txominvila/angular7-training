@@ -1,0 +1,4 @@
+<div id="filter-wrapper">
+  <label for="filterValue">Filter projects by name:</label>
+  <input type="text" id="filterValue" name="filterValue" value="" [(ngModel)]='filterValue' (input)="filter.emit(filterValue)">
+</div>

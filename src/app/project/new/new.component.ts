@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ProjectModel} from '../models/project.model';
-import {environment} from '../../../environments/environment';
+import {ProjectService} from '../project.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-new',
@@ -9,27 +9,12 @@ import {environment} from '../../../environments/environment';
 })
 export class NewComponent implements OnInit {
 
-  public header = 'Add new project';
-  public projects: ProjectModel[] = environment.projects;
-  public project: ProjectModel;
+  constructor(private projectService: ProjectService, private router:Router) { }
 
-  constructor() { }
+  ngOnInit() { }
 
-  ngOnInit() {
-    this.project = this.initializeProject();
+  public onProjectCreate(project: string) {
+    this.projectService.addNewProject(project);
+    return this.router.navigate(['projects']);
   }
-
-  public addNewProject() {
-    this.projects.push(this.project);
-    this.project = this.initializeProject();
-  }
-
-  private initializeProject() {
-    const newId = (this.projects.length > 0) ? Math.max.apply(Math, this.projects.map(function(o) { return o.id; })) + 1 : 0;
-    return {
-      id: newId,
-      name: ''
-    };
-  }
-
 }

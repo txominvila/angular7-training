@@ -1,11 +1,10 @@
-<h2>{{ header }}</h2>
-<ul class="list-group" *ngIf="projects.length>0; else empty">
-  <li class="list-group-item" *ngFor="let project of projects">
-    <a routerLink="/projects/{{ project.id }}" title="{{ project.name }}">{{ project.name }}</a>
-  </li>
-</ul>
-<ng-template #empty> <i>No data yet</i> </ng-template>
+<h2>{{ header }} </h2>
+<div id="add-new-wrapper">
+  <a id="add-new" routerLink="/projects/new" class="badge badge-success">Add new project</a>
+</div>
+<app-filter (filter)="onFilter($event)" ></app-filter>
+<app-display [projects]="projectsFilteredByName"></app-display>
 
-<a id="add-new" routerLink="/projects/new" class="badge badge-success">Add new project</a>
+
 
 

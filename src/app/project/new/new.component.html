@@ -1,9 +1,1 @@
-<h2>{{ header }}</h2>
-
-<div class="form-group">
-  <label for="project-name">Project name</label>
-  <input type="text" class="form-control" id="project-name" placeholder="Enter project name" [(ngModel)]="project.name">
-</div>
-<button type="submit" class="btn btn-primary" (click)="addNewProject()">Submit</button>
-
-<pre class="card bg-light">{{ projects | json }}</pre>
+<app-new-form (project)="onProjectCreate($event)"></app-new-form>

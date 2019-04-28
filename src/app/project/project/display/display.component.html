@@ -1,0 +1,6 @@
+<ul class="list-group" *ngIf="projects.length>0; else empty">
+  <li class="list-group-item" *ngFor="let project of projects">
+    <a routerLink="/projects/{{ project.id }}" title="{{ project.name }}">{{ project.name }}</a>
+  </li>
+</ul>
+<ng-template #empty> <i>No data</i> </ng-template>

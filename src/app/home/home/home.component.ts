@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {environment} from '../../../environments/environment';
+import {ProjectService} from '../../project/project.service';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +9,12 @@ import {environment} from '../../../environments/environment';
 export class HomeComponent implements OnInit {
 
   public header = 'Projects';
-  public projects = environment.projects;
   public projectCount = 0;
   public counterClass = 'badge badge-danger';
 
-  constructor() { }
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.projectCount = this.projects.length;
+    this.projectCount = this.projectService.getProjects().length;
   }
-
 }
