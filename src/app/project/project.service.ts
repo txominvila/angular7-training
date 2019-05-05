@@ -57,7 +57,7 @@ export class ProjectService {
 
   public filterProjects(filterValue: string) {
     return this.projects$().pipe(
-        map(projects => projects.filter(project => project.name.toLowerCase().includes(filterValue.toLowerCase())))
+        map(projects => projects.filter(project => (project.name ? project.name : '').toLowerCase().includes(filterValue.toLowerCase())))
     );
   }
 }
