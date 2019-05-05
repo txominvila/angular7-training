@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ProjectModel} from '../models/project.model';
 import {ProjectService} from '../project.service';
+
 
 @Component({
   selector: 'app-project',
@@ -10,17 +10,15 @@ import {ProjectService} from '../project.service';
 export class ProjectComponent implements OnInit {
 
   public header = 'Project list';
-  public projects: ProjectModel[];
-  public projectsFilteredByName: ProjectModel[];
+  public projects$;
 
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.projects = this.projectService.getProjects();
-    this.projectsFilteredByName = this.projects;
+    this.projects$ = this.projectService.projects$();
   }
 
   public onFilter(filterValue: string) {
-    this.projectsFilteredByName = this.projects.filter(project => project.name.toLowerCase().includes(filterValue.toLowerCase()));
+    this.projects$ = this.projectService.filterProjects(filterValue);
   }
 }

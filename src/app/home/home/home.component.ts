@@ -11,10 +11,11 @@ export class HomeComponent implements OnInit {
   public header = 'Projects';
   public projectCount = 0;
   public counterClass = 'badge badge-danger';
+  public projects$;
 
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.projectCount = this.projectService.getProjects().length;
+    this.projects$ = this.projectService.projects$();
   }
 }

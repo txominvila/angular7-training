@@ -1,5 +1,4 @@
 <h2>{{ header }}</h2>
 <p>
-  You have <mark [class]="counterClass">{{ projectCount }}</mark> available projects
+  You have <mark [class]="counterClass">{{ (projects$ | async).length }}</mark> available projects
 </p>
-

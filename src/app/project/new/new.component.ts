@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class NewComponent implements OnInit {
 
-  constructor(private projectService: ProjectService, private router:Router) { }
+  constructor(private projectService: ProjectService, private router: Router) { }
 
   ngOnInit() { }
 

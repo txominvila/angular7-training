@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../environments/environment';
-import {ProjectModel} from './models/project.model';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,31 +9,55 @@ import {ProjectModel} from './models/project.model';
 
 export class ProjectService {
 
-  private projects: ProjectModel[] = environment.projects;
+  private api = 'https://api-base.herokuapp.com/api/pub/projects';
+  private _project$ = new BehaviorSubject<any>(null);
+  private _projects$ = new BehaviorSubject<any[]>([]);
 
-  constructor() { }
+  public projects$ = () => this._projects$.asObservable();
+  public project$ = () => this._project$.asObservable();
 
-  public getProjects() {
-    return this.projects;
+  constructor(private httpClient: HttpClient) {
+    this.getProjects();
   }
 
-  public addNewProject(name: string) {
-    let project: ProjectModel;
-    project = this.initializeProject();
-    project.name = name;
-    this.projects.push(project);
+  public getProjects() {
+    this.httpClient
+        .get<any[]>(this.api)
+        .subscribe(
+            apiResult => {
+              this._projects$.next(apiResult);
+            }
+        );
   }
 
   public getProject(id: number) {
-    const filterValue = id;
-    return (this.projects.filter(project => project.id === filterValue))[0];
+    this.httpClient
+        .get<any[]>(this.api + '/' + id)
+        .subscribe(
+            apiResult => {
+              this._project$.next(apiResult);
+            }
+        );
   }
 
-  private initializeProject() {
-    const newId = (this.projects.length > 0) ? Math.max.apply(Math, this.projects.map(function(o) { return o.id; })) + 1 : 0;
-    return {
-      id: newId,
-      name: ''
+  public addNewProject(name: string) {
+    const newProject = {
+      name: name,
+      creator: 't4n'
     };
+
+    this.httpClient
+        .post(this.api, newProject)
+        .subscribe(
+            () => {
+              this.getProjects();
+            }
+        );
+  }
+
+  public filterProjects(filterValue: string) {
+    return this.projects$().pipe(
+        map(projects => projects.filter(project => project.name.toLowerCase().includes(filterValue.toLowerCase())))
+    );
   }
 }

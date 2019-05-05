@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ProjectModel} from '../../models/project.model';
 import {ProjectService} from '../../project.service';
 
 @Component({
@@ -10,14 +9,12 @@ import {ProjectService} from '../../project.service';
 export class ViewerDisplayComponent implements OnInit {
   @Input() public projectId: number;
   public header = 'Project';
-  public projects: ProjectModel[];
-  public project: ProjectModel;
+  public project$: any;
 
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.projects = this.projectService.getProjects();
-    const filterValue = this.projectId;
-    this.project = (this.projects.filter(project => project.id === filterValue))[0];
+    this.project$ = this.projectService.project$();
+    this.projectService.getProject(this.projectId);
   }
 }
