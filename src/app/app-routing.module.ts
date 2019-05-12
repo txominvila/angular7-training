@@ -10,6 +10,9 @@ const routes: Routes = [
     path: 'projects',
     loadChildren: './project/project.module#ProjectModule'
   },
+  {
+    path: 'reactive',
+    loadChildren: './reactive/reactive.module#ReactiveModule' },
 ];
 
 @NgModule({

@@ -1,0 +1,42 @@
+<h2>
+  User registration
+</h2>
+<form [formGroup]="formGroup">
+  <div class="form-group">
+    <label for="registeredOn">Registered On</label>
+    <input id="registeredOn"
+           name="registeredOn"
+           formControlName="registeredOn"
+           type="date"
+           class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input id="name"
+           name="name"
+           formControlName="name"
+           type="text"
+           class="form-control" />
+    <span class="error">{{ getError('name')}}</span>
+  </div>
+  <div class="form-group">
+    <label id="email" for="email">E-mail</label>
+    <input name="email"
+           formControlName="email"
+           type="email"
+           class="form-control" />
+    <span class="error">{{ getError('email')}}</span>
+  </div>
+  <div class="form-group">
+    <label id="password" for="password">Password</label>
+    <input name="password"
+           formControlName="password"
+           type="password"
+           class="form-control" />
+    <span class="error">{{ getError('password')}}</span>
+  </div>
+  <div class="form-group">
+    <button (click)="register()"
+            [disabled]="formGroup.invalid">Register me!</button>
+  </div>
+</form>

@@ -1,8 +1,8 @@
 <footer>
   <div class="container-fluid">
     <div class="row">
-      <div class="copyright col-12">{{ copyright }}</div>
+      <div class="messages col-6"><span>Last http call:</span> {{ (httpMessages$ | async) }}</div>
+      <div class="copyright col-6">{{ copyright }}</div>
     </div>
   </div>
-
 </footer>
